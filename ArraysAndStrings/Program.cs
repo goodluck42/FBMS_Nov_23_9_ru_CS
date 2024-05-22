@@ -135,9 +135,9 @@ Console.WriteLine($"val = {val}");
 Console.WriteLine($"intValue = {intValue}");
 
 
+char c = Convert.ToChar(65);
 
-
-
+Console.WriteLine(c);
 
 
 
