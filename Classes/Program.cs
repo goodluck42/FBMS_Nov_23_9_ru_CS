@@ -1,75 +1,101 @@
-﻿var account = new Account
+﻿class Person
 {
-    Login = "MYLogin", // setter
-    Password = "qwerty123" // setter
-};
-//
-// // var account2 = new Account("MYLogin", "qwerty123");
-//
-// // account.Login = "MYLogin"; // setter
-// // account.Password = "qwerty123"; // setter
-//
-//
-// Console.WriteLine(account.Login); // getter
-// Console.WriteLine(account.Password); // getter
-//
-//
-// Tuples
-// (int val1, float val2) tuple = (42, 13.45f);
-// var (val1, val2) = ("Text", 42);
-//
-//
-// 
-// 
-// Console.WriteLine(tuple.val1);
-// Console.WriteLine(tuple.val2);
+    public string? Name { get; set; }
+    public int Age { get; set; }
+}
 
-var (login, password) = account.Deconstruct();
-
-Console.WriteLine(login);
-Console.WriteLine(password);
-
-
-Console.Read();
-class Account
+class Program
 {
-    private string _password; // backing field
-
-    public Account() : this(string.Empty, string.Empty)
+    static void Main(string[] args)
     {
+        // Top-level statements
+
+        var account = new Account
+        {
+            Login = "MYLogin", // setter
+            Password = "qwerty123" // setter
+        };
+
+
+        //
+        // // var account2 = new Account("MYLogin", "qwerty123");
+        //
+        // // account.Login = "MYLogin"; // setter
+        // // account.Password = "qwerty123"; // setter
+        //
+        //
+        // Console.WriteLine(account.Login); // getter
+        // Console.WriteLine(account.Password); // getter
+        //
+        //
+        // Tuples
+        // (int val1, float val2) tuple = (42, 13.45f);
+        // var (val1, val2) = ("Text", 42);
+        //
+        //
+        // 
+        // 
+        // Console.WriteLine(tuple.val1);
+        // Console.WriteLine(tuple.val2);
+
+        var (login, password) = account.Deconstruct();
+
+        Console.WriteLine(login);
+        Console.WriteLine(password);
+
+        // Ref test
+        // var person = new Person // Person = 0x1c ---> 0x42
+        // {
+        //     Age = 42,
+        //     Name = "Vasya"
+        // };
+        //
+        // RefTest(ref person);
+        //
+        // Console.WriteLine(person.Name);
+        // Console.WriteLine(person.Age);
         
+        
+        // Out test
+        
+        OutTest(out Person person);
+
+        Console.WriteLine(person.Name);
+        Console.WriteLine(person.Age);
+
+        string input = Console.ReadLine()!;
+
+        
+        if (int.TryParse(input, out int res))
+        {
+            Console.WriteLine(res * 2);
+        }
+        
+        Console.Read();
     }
 
-    public Account(string login, string password)
+    static void RefTest(ref Person person) // Person = 0x1c ---> 0x42
     {
-        Login = login;
-        _password = password;
-    }
+        // person->Age *= 2;
+        // person.Age *= 2;
 
-    public (string, string) Deconstruct()
-    {
-        return (Login, Password);
+        person = new Person // Person = 0x1c ---> 0xff4c 
+        {
+            Age = 4, Name = "Vasya_Malish"
+        };
     }
     
-    public string Login { get; set; } // Auto property
-
-    public string Password // Full property
+    static void OutTest(out Person person)
     {
-        get
+        person = new Person
         {
-            Console.WriteLine("get Password");
-            return _password;
-        }
-        set
-        {
-            Console.WriteLine("set Password");
+            Age = 25,
+            Name = "Fuad"
+        };
+    }
 
-            if (value.Length < 7)
-            {
-                return;
-            }
-
-            _password = value;
-        }
+    static void PrintSquare(int length, char symbol)
+    {
+        // ...
     }
 }
