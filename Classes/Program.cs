@@ -38,10 +38,10 @@ class Program
         // Console.WriteLine(tuple.val1);
         // Console.WriteLine(tuple.val2);
 
-        var (login, password) = account.Deconstruct();
-
-        Console.WriteLine(login);
-        Console.WriteLine(password);
+        // var (login, password) = account.Deconstruct();
+        //
+        // Console.WriteLine(login);
+        // Console.WriteLine(password);
 
         // Ref test
         // var person = new Person // Person = 0x1c ---> 0x42
@@ -59,12 +59,11 @@ class Program
         // Out test
         
         OutTest(out Person person);
-
+        
         Console.WriteLine(person.Name);
         Console.WriteLine(person.Age);
-
+        
         string input = Console.ReadLine()!;
-
         
         if (int.TryParse(input, out int res))
         {
@@ -81,7 +80,8 @@ class Program
 
         person = new Person // Person = 0x1c ---> 0xff4c 
         {
-            Age = 4, Name = "Vasya_Malish"
+            Age = 4,
+            Name = "Vasya_Malish"
         };
     }
     
