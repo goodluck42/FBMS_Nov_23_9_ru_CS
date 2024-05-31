@@ -45,4 +45,10 @@ class PropertyNotInitializedException : Exception
 }
 
 
+string ConvertTo(string input, int from, int to)
+{
+    
+}
+
+
 // class PropertyNotInitializedException2(string message) : Exception(message);
