@@ -1,0 +1,94 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        double[] A = new double[5];
+        double[,] B = new double[3, 4];
+
+        Console.WriteLine("Enter 5 elements for array A:");
+        for (int i = 0; i < A.Length; i++)
+        {
+            string input = Console.ReadLine() ?? "0"; // ?? menaet "null" na string "0" (warning vidaval v etom meste, prishlos` napisat` tak)
+            if (!string.IsNullOrEmpty(input)) // check na pustotu, esli pusto to true, i false v protivnom sluchaye
+            {
+                A[i] = double.Parse(input);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input, setting element to 0.");
+                A[i] = 0;
+            }
+        }
+
+        Random rand = new Random();
+        for (int i = 0; i < B.GetLength(0); i++) // rows
+        {
+            for (int j = 0; j < B.GetLength(1); j++) // columns
+            {
+                B[i, j] = rand.NextDouble() * 10;
+            }
+        }
+
+        Console.WriteLine("Array A:");
+        foreach (double a in A) // proxod po kajdomu elementu v massive
+        {
+            Console.Write(a + " ");
+        }
+        Console.WriteLine();
+        Console.WriteLine($"---------------------");
+
+        Console.WriteLine("Array B:");
+        for (int i = 0; i < B.GetLength(0); i++)
+        {
+            for (int j = 0; j < B.GetLength(1); j++)
+            {
+                Console.Write(B[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine($"---------------------");
+
+        double maxElement = double.MinValue;
+        double minElement = double.MaxValue;
+        double sumAllElements = 0;
+        double multiplyAllElements = 1;
+        double sumEvenElementsA = 0;
+        double sumOddColumnsB = 0;
+
+        for (int i = 0; i < A.Length; i++)
+        {
+            double a = A[i];
+            if (a > maxElement) maxElement = a;
+            if (a < minElement) minElement = a;
+            sumAllElements += a;
+            multiplyAllElements *= a;
+            if ((int)a % 2 == 0) sumEvenElementsA += a;
+        }
+
+        for (int i = 0; i < B.GetLength(0); i++)
+        {
+            for (int j = 0; j < B.GetLength(1); j++)
+            {
+                double b = B[i, j];
+                if (b > maxElement) maxElement = b;
+                if (b < minElement) minElement = b;
+                sumAllElements += b;
+                multiplyAllElements *= b;
+                if (j % 2 != 0) sumOddColumnsB += b;
+            }
+        }
+
+        Console.WriteLine($"Maximum element: {maxElement}");
+        Console.WriteLine($"---------------------");
+        Console.WriteLine($"Minimum element: {minElement}");
+        Console.WriteLine($"---------------------");
+        Console.WriteLine($"Sum of all elements: {sumAllElements}");
+        Console.WriteLine($"---------------------");
+        Console.WriteLine($"Product of all elements: {multiplyAllElements}");
+        Console.WriteLine($"---------------------");
+        Console.WriteLine($"Sum of even elements in array A: {sumEvenElementsA}");
+        Console.WriteLine($"---------------------");
+        Console.WriteLine($"Sum of elements in odd columns of array B: {sumOddColumnsB}");
+    }
+}
